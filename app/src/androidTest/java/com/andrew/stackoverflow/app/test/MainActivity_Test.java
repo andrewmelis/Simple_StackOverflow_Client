@@ -40,6 +40,10 @@ public class MainActivity_Test extends ActivityInstrumentationTestCase2<MainActi
         assertEquals("test question", questionFetchedText.getText().toString());
     }
 
+    public void testRotate() {
+        assertFalse(true);
+    }
+
     public void testFetchButtonInitNotNull() {
         assertNotNull(fetchQuestionButton);
     }
