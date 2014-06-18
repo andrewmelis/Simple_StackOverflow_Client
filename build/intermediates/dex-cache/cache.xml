@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pre-dex-items>
+
+    <item
+        dex="/Users/andrewmelis/Dev/personal/android/StackOverflow/app/build/intermediates/pre-dexed/test/debug/mockito-all-1.9.5-bae4267415b1d7eb4456e6908e76007a3c9361b6.jar"
+        jar="/Users/andrewmelis/.gradle/caches/modules-2/files-2.1/org.mockito/mockito-all/1.9.5/79a8984096fc6591c1e3690e07d41be506356fa5/mockito-all-1.9.5.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="79a8984096fc6591c1e3690e07d41be506356fa5"/>
+
+</pre-dex-items>
