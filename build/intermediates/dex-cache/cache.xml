@@ -2,26 +2,26 @@
 <pre-dex-items>
 
     <item
-        dex="/Users/andrewmelis/Dev/personal/android/StackOverflow/app/build/intermediates/pre-dexed/test/debug/okio-1.0.0-0d467f778b3bd0e867412e677880309f6945d387.jar"
-        jar="/Users/andrewmelis/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.0.0/2534c458682c73f5b9871131ab3098d3f987ca3/okio-1.0.0.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="02534c458682c73f5b9871131ab3098d3f987ca3"/>
-    <item
-        dex="/Users/andrewmelis/Dev/personal/android/StackOverflow/app/build/intermediates/pre-dexed/test/debug/mockwebserver-2.0.0-RC2-f842c2a513050c8d1d071b85aef797e2a14988cf.jar"
-        jar="/Users/andrewmelis/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/mockwebserver/2.0.0-RC2/4d579698a5e2920d1e407c631b587b07678ab64c/mockwebserver-2.0.0-RC2.jar"
+        dex="/Users/andrewmeils/Dev/personal/android/Simple_StackOverflow_Client/app/build/intermediates/pre-dexed/test/debug/mockwebserver-2.0.0-RC2-cdbd76d91b571ade4be6929cd510fcba083848e3.jar"
+        jar="/Users/andrewmeils/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/mockwebserver/2.0.0-RC2/4d579698a5e2920d1e407c631b587b07678ab64c/mockwebserver-2.0.0-RC2.jar"
         jumboMode="false"
         revision="19.1.0"
         sha1="4d579698a5e2920d1e407c631b587b07678ab64c"/>
     <item
-        dex="/Users/andrewmelis/Dev/personal/android/StackOverflow/app/build/intermediates/pre-dexed/test/debug/okhttp-2.0.0-RC2-26024e74b43cc495418119debc1b82b2074b71ea.jar"
-        jar="/Users/andrewmelis/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp/2.0.0-RC2/9bcdc6a158903071158dafe61c4c0847de354518/okhttp-2.0.0-RC2.jar"
+        dex="/Users/andrewmeils/Dev/personal/android/Simple_StackOverflow_Client/app/build/intermediates/pre-dexed/test/debug/okhttp-2.0.0-RC2-73ed2804f9e763446ac3bf7d7c69070e9f5d197f.jar"
+        jar="/Users/andrewmeils/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp/2.0.0-RC2/9bcdc6a158903071158dafe61c4c0847de354518/okhttp-2.0.0-RC2.jar"
         jumboMode="false"
         revision="19.1.0"
         sha1="9bcdc6a158903071158dafe61c4c0847de354518"/>
     <item
-        dex="/Users/andrewmelis/Dev/personal/android/StackOverflow/app/build/intermediates/pre-dexed/test/debug/bcprov-jdk15on-1.48-35be5ea51678e96573e90e5824576de1bbc19bb0.jar"
-        jar="/Users/andrewmelis/.gradle/caches/modules-2/files-2.1/org.bouncycastle/bcprov-jdk15on/1.48/960dea7c9181ba0b17e8bab0c06a43f0a5f04e65/bcprov-jdk15on-1.48.jar"
+        dex="/Users/andrewmeils/Dev/personal/android/Simple_StackOverflow_Client/app/build/intermediates/pre-dexed/test/debug/okio-1.0.0-63793584a835f0af9b14042e21c1bdca630c129e.jar"
+        jar="/Users/andrewmeils/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.0.0/2534c458682c73f5b9871131ab3098d3f987ca3/okio-1.0.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="02534c458682c73f5b9871131ab3098d3f987ca3"/>
+    <item
+        dex="/Users/andrewmeils/Dev/personal/android/Simple_StackOverflow_Client/app/build/intermediates/pre-dexed/test/debug/bcprov-jdk15on-1.48-5d2ad3de3a5a4502ff63cacaea8fea481b2bf987.jar"
+        jar="/Users/andrewmeils/.gradle/caches/modules-2/files-2.1/org.bouncycastle/bcprov-jdk15on/1.48/960dea7c9181ba0b17e8bab0c06a43f0a5f04e65/bcprov-jdk15on-1.48.jar"
         jumboMode="false"
         revision="19.1.0"
         sha1="960dea7c9181ba0b17e8bab0c06a43f0a5f04e65"/>

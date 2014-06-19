@@ -40,6 +40,7 @@ public class WebAPI {
             body = Utilities.convertInputStreamToString(connection.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
+            body = "connection error";
         } finally {
             disconnectConnection(connection);
         }

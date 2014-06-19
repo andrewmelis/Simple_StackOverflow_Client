@@ -16,7 +16,7 @@ public class MockWebIntentService extends WebIntentService {
     protected String retrieveQuestionFromWebAPI() {
         String currentMethodName = "retrieveQuestionFromWebAPI";
         passMethodNameToStorage(currentMethodName);
-        return null;
+        return "testing string";
     }
 
     @Override

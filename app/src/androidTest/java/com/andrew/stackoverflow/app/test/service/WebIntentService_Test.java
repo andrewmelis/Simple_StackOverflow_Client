@@ -43,6 +43,7 @@ public class WebIntentService_Test extends ServiceTestCase<MockWebIntentService>
         Thread.sleep(200l);
 
         assertTrue(storage.getIntentServiceMethodWasCalled("passFetchedQuestionToStorage"));
+        assertEquals("testing string", storage.getQuestion());
     }
 
     private void buildAndStartMockWebIntentService() {
