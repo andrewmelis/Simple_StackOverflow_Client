@@ -25,4 +25,14 @@ public class ClearableWebDataStorage extends WebDataStorage {
 
         unregisterAllObservers();
     }
+
+    //used for testing WebIntentService
+    public void setIntentServiceMethodWasCalled(String methodName) {
+        editor.putBoolean(methodName, true);
+        editor.commit();
+    }
+
+    public boolean getIntentServiceMethodWasCalled(String methodName) {
+        return settings.getBoolean(methodName, false);
+    }
 }

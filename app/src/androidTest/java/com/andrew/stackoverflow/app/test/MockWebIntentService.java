@@ -1,13 +1,16 @@
 package com.andrew.stackoverflow.app.test;
 
+import com.andrew.stackoverflow.app.WebDataStorage;
 import com.andrew.stackoverflow.app.WebIntentService;
 
 public class MockWebIntentService extends WebIntentService {
 
-    public boolean handleActionFetchQuestionWasCalled = false;
-
     @Override
-    protected void handleActionFetchQuestion() {
-        handleActionFetchQuestionWasCalled = true;
+    public void handleActionFetchQuestion() {
+        String currentMethodName = "handleActionFetchQuestion";
+        ClearableWebDataStorage storage = ClearableWebDataStorage.getInstance(getApplicationContext());
+        storage.setIntentServiceMethodWasCalled(currentMethodName);
+
     }
+
 }

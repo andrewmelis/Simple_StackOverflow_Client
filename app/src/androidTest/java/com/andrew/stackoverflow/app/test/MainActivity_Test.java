@@ -1,6 +1,8 @@
 package com.andrew.stackoverflow.app.test;
 
 import android.content.Loader;
+import android.content.pm.ActivityInfo;
+import android.preference.PreferenceManager;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.UiThreadTest;
 import android.widget.Button;
@@ -44,23 +46,52 @@ public class MainActivity_Test extends ActivityInstrumentationTestCase2<MainActi
     }
 
     public void testFetchTextInitToPreviouslyRetrievedQuestionThroughObserver() {
-//        storage.setQuestion("previously fetched question");
         WebDataStorage.getInstance(activity).setQuestion("previously fetched question");
         killAndRestartActivity();
         assertEquals("previously fetched question", fetchedQuestionText.getText().toString());
+
+        clearRealWebDataStorage();
+    }
+
+    private void killAndRestartActivity() {
+        activity.finish();
+        activity = this.getActivity();
+    }
+
+    public void testRotateToLandscapeOrientationMaintainsPreviousQuestion() {
+        WebDataStorage.getInstance(activity).setQuestion("other fetched question");
+        rotateScreen();
+        assertEquals("other fetched question", fetchedQuestionText.getText().toString());
+
+        clearRealWebDataStorage();
+    }
+
+    private void rotateScreen() {
+        activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        getInstrumentation().waitForIdleSync();
     }
 
     public void testFetchTextUpdatesWhenDBUpdatesThroughObserver() throws InterruptedException {
         WebDataStorage.getInstance(activity).setQuestion("updated test question");
         Thread.sleep(100l);    //allow observer to be notified of changes -- should move to LoaderTestCase?
         assertEquals("updated test question", fetchedQuestionText.getText().toString());
+
+        clearRealWebDataStorage();
+    }
+
+    /*TODO find way to inject ClearableWebDataStorage into
+        testFetchTextInitToPreviouslyRetrievedQuestionThroughObserver,
+        testRotateToLandscapeOrientationMaintainsPreviousQuestion, and
+        testFetchTextUpdatesWhenDBUpdatesThroughObserver */
+    private void clearRealWebDataStorage() {
+        PreferenceManager.getDefaultSharedPreferences(activity).edit().clear().commit();
     }
 
     public void testFetchButtonInitNotNull() {
         assertNotNull(fetchQuestionButton);
     }
 
-    public void testPressingFetchButtonCallsWebIntentService() {
+    public void testPressingFetchButtonCallsWebIntentService() throws InterruptedException {
         InspectableFetchQuestionButtonListener mockListener = new InspectableFetchQuestionButtonListener();
         fetchQuestionButton.setOnClickListener(mockListener);
 
@@ -84,15 +115,5 @@ public class MainActivity_Test extends ActivityInstrumentationTestCase2<MainActi
         activity.onLoadFinished(testLoader, expectedText);
 
         assertEquals(expectedText, fetchedQuestionText.getText().toString());
-    }
-
-
-    public void testRotate() {
-        assertFalse(true);
-    }
-
-    private void killAndRestartActivity() {
-        activity.finish();
-        activity = this.getActivity();
     }
 }

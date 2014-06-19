@@ -13,7 +13,12 @@ import android.widget.TextView;
 public class MainActivity extends Activity implements LoaderManager.LoaderCallbacks<String> {
 
     private TextView fetchedQuestionText;
-    private DataSetObserver webDataStorageObserver;
+    private DataSetObserver webDataStorageObserver = new DataSetObserver() {
+        @Override
+        public void onChanged() {
+            getLoaderManager().restartLoader(0, null, MainActivity.this);
+        }
+    };;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,13 +27,6 @@ public class MainActivity extends Activity implements LoaderManager.LoaderCallba
 
         fetchedQuestionText = (TextView) findViewById(R.id.fetched_question_text);
         findViewById(R.id.fetch_question_button).setOnClickListener(new FetchQuestionButtonListener());
-
-        webDataStorageObserver = new DataSetObserver() {
-            @Override
-            public void onChanged() {
-                getLoaderManager().restartLoader(0, null, MainActivity.this);
-            }
-        };
 
         getLoaderManager().restartLoader(0, null, this);
     }
