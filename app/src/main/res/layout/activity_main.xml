@@ -18,7 +18,7 @@
         android:id="@+id/fetch_question_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fetch Newest Question!"
+        android:text="Fetch the Newest Question on StackOverflow!"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
