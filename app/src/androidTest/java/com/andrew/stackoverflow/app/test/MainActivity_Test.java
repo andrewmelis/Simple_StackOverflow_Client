@@ -1,18 +1,22 @@
 package com.andrew.stackoverflow.app.test;
 
+import android.content.Loader;
 import android.test.ActivityInstrumentationTestCase2;
+import android.test.UiThreadTest;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.andrew.stackoverflow.app.MainActivity;
 import com.andrew.stackoverflow.app.R;
 import com.andrew.stackoverflow.app.WebDataStorage;
+import com.andrew.stackoverflow.app.WebDataStorageLoader;
 
 public class MainActivity_Test extends ActivityInstrumentationTestCase2<MainActivity> {
 
     private MainActivity activity;
-    private TextView questionFetchedText;
+    private TextView fetchedQuestionText;
     private Button fetchQuestionButton;
+    private ClearableWebDataStorage storage;
 
     public MainActivity_Test() {
         super(MainActivity.class);
@@ -23,38 +27,67 @@ public class MainActivity_Test extends ActivityInstrumentationTestCase2<MainActi
         super.setUp();
 
         activity = getActivity();
+        storage = ClearableWebDataStorage.getInstance(activity);
 
-        questionFetchedText = (TextView) activity.findViewById(R.id.question_fetched_text);
+        fetchedQuestionText = (TextView) activity.findViewById(R.id.fetched_question_text);
         fetchQuestionButton = (Button) activity.findViewById(R.id.fetch_question_button);
     }
 
+    @Override
+    public void tearDown() throws Exception {
+        storage.clearWebDataStorage();
+        super.tearDown();
+    }
+
     public void testFetchTextInitNotNull() {
-        assertNotNull(questionFetchedText);
+        assertNotNull(fetchedQuestionText);
     }
 
-    public void testFetchTextInitToPreviouslyRetrievedQuestionFromDB() {
-        WebDataStorage.getInstance(activity).setQuestion("test question");
-
+    public void testFetchTextInitToPreviouslyRetrievedQuestionThroughObserver() {
+//        storage.setQuestion("previously fetched question");
+        WebDataStorage.getInstance(activity).setQuestion("previously fetched question");
         killAndRestartActivity();
-
-        assertEquals("test question", questionFetchedText.getText().toString());
+        assertEquals("previously fetched question", fetchedQuestionText.getText().toString());
     }
 
-    public void testRotate() {
-        assertFalse(true);
+    public void testFetchTextUpdatesWhenDBUpdatesThroughObserver() throws InterruptedException {
+        WebDataStorage.getInstance(activity).setQuestion("updated test question");
+        Thread.sleep(100l);    //allow observer to be notified of changes -- should move to LoaderTestCase?
+        assertEquals("updated test question", fetchedQuestionText.getText().toString());
     }
 
     public void testFetchButtonInitNotNull() {
         assertNotNull(fetchQuestionButton);
     }
 
-    public void testPressingFetchButtonCallsStaticWebIntentService() {
-//        fetchQuestionButton.callOnClick();
+    public void testPressingFetchButtonCallsWebIntentService() {
+        InspectableFetchQuestionButtonListener mockListener = new InspectableFetchQuestionButtonListener();
+        fetchQuestionButton.setOnClickListener(mockListener);
 
+        fetchQuestionButton.callOnClick();
         getInstrumentation().waitForIdleSync();
 
-        //how do I test this?
-//        Mockito.verify(activity).fetchQuestion()          //requires fetchQuestion public...
+        assertTrue(mockListener.startActionFetchQuestionWasCalled);
+    }
+
+    public void testOnCreateLoaderReturnsWebDataStorageLoader() {
+        Loader<String> testLoader = activity.onCreateLoader(0, null);
+        assertNotNull(testLoader);
+        assertTrue(testLoader instanceof WebDataStorageLoader);
+    }
+
+    @UiThreadTest
+    public void testOnLoadFinishedUpdatesFetchQuestionText() {
+        WebDataStorageLoader testLoader = new WebDataStorageLoader(activity, storage);
+        String expectedText = "the loader should change the textview";
+
+        activity.onLoadFinished(testLoader, expectedText);
+
+        assertEquals(expectedText, fetchedQuestionText.getText().toString());
+    }
+
+
+    public void testRotate() {
         assertFalse(true);
     }
 

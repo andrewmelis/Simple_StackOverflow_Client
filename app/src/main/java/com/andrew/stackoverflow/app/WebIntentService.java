@@ -3,15 +3,17 @@ package com.andrew.stackoverflow.app;
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 public class WebIntentService extends IntentService {
     protected static final String ACTION_FETCH_QUESTION = "com.andrew.stackoverflow.app.action.FETCH_QUESTION";
 
     public static void startActionFetchQuestion(Context context) {
         Intent intent = new Intent(context, WebIntentService.class);
-        intent.setAction(ACTION_FETCH_QUESTION);
+        intent.setAction(WebIntentService.ACTION_FETCH_QUESTION);
         context.startService(intent);
     }
+
 
     public WebIntentService() {
         super("WebIntentService");
@@ -27,11 +29,11 @@ public class WebIntentService extends IntentService {
         }
     }
 
-    private void handleActionFetchQuestion() {
-        String questionJSON = "";
+    protected void handleActionFetchQuestion() {
+        String questionJSON = "temp";
 
-//        questionJSON =
+//        WebDataStorage.getInstance(getApplicationContext()).setQuestion(questionJSON);
 
-        throw new UnsupportedOperationException("Not yet implemented");
+//        throw new UnsupportedOperationException("Not yet implemented");
     }
 }

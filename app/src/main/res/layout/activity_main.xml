@@ -9,8 +9,8 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/question_fetched_text"
-        android:text="nothing retrieved yet!"
+        android:id="@+id/fetched_question_text"
+        android:text="loading.."
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

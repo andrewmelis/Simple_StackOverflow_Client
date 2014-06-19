@@ -10,9 +10,9 @@ public class WebDataStorage {
 
     private static WebDataStorage uniqueInstance;
 
-    private final SharedPreferences settings;
-    private final SharedPreferences.Editor editor;
-    private final DataSetObservable observable;
+    protected final SharedPreferences settings;
+    protected final SharedPreferences.Editor editor;
+    protected final DataSetObservable observable;
 
     public static synchronized WebDataStorage getInstance(Context context) {
         if (uniqueInstance == null) {
@@ -21,7 +21,7 @@ public class WebDataStorage {
         return uniqueInstance;
     }
 
-    private WebDataStorage(Context context) {
+    protected WebDataStorage(Context context) {
         settings = PreferenceManager.getDefaultSharedPreferences(context);
         editor = settings.edit();
         observable = new DataSetObservable();

@@ -9,20 +9,18 @@ import com.andrew.stackoverflow.app.WebDataStorage;
 
 public class WebDataStorage_Test extends AndroidTestCase {
 
-    private WebDataStorage webDataStorage;
+    private ClearableWebDataStorage webDataStorage;
 
     @Override
     public void tearDown() throws Exception {
-        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(getContext()).edit();
-        editor.clear();
-        editor.commit();
+        webDataStorage.clearWebDataStorage();
 
         webDataStorage.unregisterAllObservers();
     }
 
     public void setUp() throws Exception {
         super.setUp();
-        webDataStorage = WebDataStorage.getInstance(getContext());
+        webDataStorage = ClearableWebDataStorage.getInstance(getContext());
     }
 
     public void testGetInstanceDoesNotReturnNull() {
