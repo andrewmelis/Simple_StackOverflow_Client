@@ -8,7 +8,7 @@ import com.andrew.stackoverflow.app.WebDataStorageLoader;
 public class WebDataStorageLoader_Test extends InstrumentationTestCase {
 
     public void testLoadInBackground() {
-        WebDataStorage wds = ClearableWebDataStorage.getInstance(getInstrumentation().getTargetContext());
+        WebDataStorage wds = TestingWebDataStorage.getInstance(getInstrumentation().getTargetContext());
 
         String expected = "test question";
         wds.setQuestion(expected);

@@ -1,15 +1,13 @@
 package com.andrew.stackoverflow.app.test;
 
-import android.content.SharedPreferences;
 import android.database.DataSetObserver;
-import android.preference.PreferenceManager;
 import android.test.AndroidTestCase;
 
 import com.andrew.stackoverflow.app.WebDataStorage;
 
 public class WebDataStorage_Test extends AndroidTestCase {
 
-    private ClearableWebDataStorage webDataStorage;
+    private TestingWebDataStorage webDataStorage;
 
     @Override
     public void tearDown() throws Exception {
@@ -20,7 +18,7 @@ public class WebDataStorage_Test extends AndroidTestCase {
 
     public void setUp() throws Exception {
         super.setUp();
-        webDataStorage = ClearableWebDataStorage.getInstance(getContext());
+        webDataStorage = TestingWebDataStorage.getInstance(getContext());
     }
 
     public void testGetInstanceDoesNotReturnNull() {
@@ -49,6 +47,12 @@ public class WebDataStorage_Test extends AndroidTestCase {
         wds_pre.setQuestion("test");
 
         assertEquals(wds_pre.getQuestion(), webDataStorage.getQuestion());
+    }
+
+    public void testSetQuestionHandlesNull() {
+        webDataStorage.setQuestion(null);
+
+        assertEquals("nothing retrieved yet!", webDataStorage.getQuestion());
     }
 
     public void testSetQuestionIsObservable() {

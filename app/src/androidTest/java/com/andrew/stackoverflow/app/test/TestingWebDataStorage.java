@@ -4,18 +4,18 @@ import android.content.Context;
 
 import com.andrew.stackoverflow.app.WebDataStorage;
 
-public class ClearableWebDataStorage extends WebDataStorage {
+public class TestingWebDataStorage extends WebDataStorage {
 
-    private static ClearableWebDataStorage uniqueInstance;
+    private static TestingWebDataStorage uniqueInstance;
 
-    public static synchronized ClearableWebDataStorage getInstance(Context context) {
+    public static synchronized TestingWebDataStorage getInstance(Context context) {
         if (uniqueInstance == null) {
-            uniqueInstance = new ClearableWebDataStorage(context);
+            uniqueInstance = new TestingWebDataStorage(context);
         }
         return uniqueInstance;
     }
 
-    private ClearableWebDataStorage(Context context) {
+    private TestingWebDataStorage(Context context) {
         super(context);
     }
 
@@ -26,7 +26,6 @@ public class ClearableWebDataStorage extends WebDataStorage {
         unregisterAllObservers();
     }
 
-    //used for testing WebIntentService
     public void setIntentServiceMethodWasCalled(String methodName) {
         editor.putBoolean(methodName, true);
         editor.commit();

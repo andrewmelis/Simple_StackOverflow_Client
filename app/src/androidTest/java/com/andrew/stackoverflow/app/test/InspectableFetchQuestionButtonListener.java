@@ -12,6 +12,6 @@ public class InspectableFetchQuestionButtonListener extends FetchQuestionButtonL
     @Override
     protected void callStartActionFetchQuestion(View view) {
         startActionFetchQuestionWasCalled = true;
-        WebIntentService.startActionFetchQuestion(view.getContext(), MockWebIntentService.class);
+        WebIntentService.startActionFetchQuestion(view.getContext());
     }
 }

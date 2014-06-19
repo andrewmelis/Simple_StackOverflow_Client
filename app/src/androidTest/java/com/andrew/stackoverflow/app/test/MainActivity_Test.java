@@ -18,7 +18,7 @@ public class MainActivity_Test extends ActivityInstrumentationTestCase2<MainActi
     private MainActivity activity;
     private TextView fetchedQuestionText;
     private Button fetchQuestionButton;
-    private ClearableWebDataStorage storage;
+    private TestingWebDataStorage storage;
 
     public MainActivity_Test() {
         super(MainActivity.class);
@@ -29,7 +29,7 @@ public class MainActivity_Test extends ActivityInstrumentationTestCase2<MainActi
         super.setUp();
 
         activity = getActivity();
-        storage = ClearableWebDataStorage.getInstance(activity);
+        storage = TestingWebDataStorage.getInstance(activity);
 
         fetchedQuestionText = (TextView) activity.findViewById(R.id.fetched_question_text);
         fetchQuestionButton = (Button) activity.findViewById(R.id.fetch_question_button);
@@ -73,6 +73,7 @@ public class MainActivity_Test extends ActivityInstrumentationTestCase2<MainActi
 
     public void testFetchTextUpdatesWhenDBUpdatesThroughObserver() throws InterruptedException {
         WebDataStorage.getInstance(activity).setQuestion("updated test question");
+        storage.setQuestion("updated test question");
         Thread.sleep(100l);    //allow observer to be notified of changes -- should move to LoaderTestCase?
         assertEquals("updated test question", fetchedQuestionText.getText().toString());
 

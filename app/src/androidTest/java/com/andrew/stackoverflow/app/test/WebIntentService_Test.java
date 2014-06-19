@@ -1,11 +1,11 @@
 package com.andrew.stackoverflow.app.test;
 
+import android.content.Intent;
 import android.test.ServiceTestCase;
-import android.test.mock.MockContext;
 
 public class WebIntentService_Test extends ServiceTestCase<MockWebIntentService> {
 
-    private ClearableWebDataStorage storage;
+    private TestingWebDataStorage storage;
 
     public WebIntentService_Test() {
         super(MockWebIntentService.class);
@@ -14,7 +14,7 @@ public class WebIntentService_Test extends ServiceTestCase<MockWebIntentService>
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        storage = ClearableWebDataStorage.getInstance(getContext());
+        storage = TestingWebDataStorage.getInstance(getSystemContext());
     }
 
     @Override
@@ -22,15 +22,31 @@ public class WebIntentService_Test extends ServiceTestCase<MockWebIntentService>
         storage.clearWebDataStorage();
     }
 
-//    public void testStartActionCommandShouldBeCalledByOnHandleIntent() throws InterruptedException {
-//        getService().startActionFetchQuestion(getContext(), MockWebIntentService.class);
-//        Thread.sleep(10000l);
-//        assertTrue(storage.getIntentServiceMethodWasCalled("handleActionFetchQuestion"));
-//    }
+    public void testHandleActionMethodShouldBeCalledByOnHandleIntent() throws InterruptedException {
+        buildAndStartMockWebIntentService();
+        Thread.sleep(100l);
 
-    public void testHandleActionFetchQuestionWritesToDB() {
-        getService().handleActionFetchQuestion();
         assertTrue(storage.getIntentServiceMethodWasCalled("handleActionFetchQuestion"));
+    }
+
+    public void testHandleActionFetchQuestionCallsWebAPI() throws InterruptedException {
+        buildAndStartMockWebIntentService();
+        Thread.sleep(200l);
+
+        assertTrue(storage.getIntentServiceMethodWasCalled("retrieveQuestionFromWebAPI"));
+    }
+
+    public void testFetchedQuestionPassedToStorage() throws InterruptedException {
+        buildAndStartMockWebIntentService();
+        Thread.sleep(200l);
+
+        assertTrue(storage.getIntentServiceMethodWasCalled("passFetchedQuestionToStorage"));
+    }
+
+    private void buildAndStartMockWebIntentService() {
+        Intent intent = new Intent(getContext(), MockWebIntentService.class);
+        intent.setAction(MockWebIntentService.ACTION_FETCH_QUESTION);
+        startService(intent);
     }
 
 }

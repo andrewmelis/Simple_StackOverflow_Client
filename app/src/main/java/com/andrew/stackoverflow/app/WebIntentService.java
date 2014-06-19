@@ -3,6 +3,7 @@ package com.andrew.stackoverflow.app;
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 
 /* static methods serve as web API facade
@@ -10,10 +11,10 @@ import android.util.Log;
     activities then updated through DataSetObservers
  */
 public class WebIntentService extends IntentService {
-    protected static final String ACTION_FETCH_QUESTION = "com.andrew.stackoverflow.app.action.FETCH_QUESTION";
+    public static final String ACTION_FETCH_QUESTION = "com.andrew.stackoverflow.app.action.FETCH_QUESTION";
 
-    public static void startActionFetchQuestion(Context context, Class<? extends WebIntentService> intentService) {
-        Intent intent = new Intent(context, intentService);
+    public static void startActionFetchQuestion(Context context) {
+        Intent intent = new Intent(context, WebIntentService.class);
         intent.setAction(WebIntentService.ACTION_FETCH_QUESTION);
         context.startService(intent);
     }
@@ -33,10 +34,20 @@ public class WebIntentService extends IntentService {
     }
 
     protected void handleActionFetchQuestion() {
-        String questionJSON = "temp";
-
-//        WebDataStorage.getInstance(getApplicationContext()).setQuestion(questionJSON);
-
-        throw new UnsupportedOperationException("Not yet implemented");
+        String questionJSON = "";
+        questionJSON = retrieveQuestionFromWebAPI();
+        passFetchedQuestionToStorage(questionJSON);
     }
+
+    protected String retrieveQuestionFromWebAPI() {
+        WebAPI webAPI = new WebAPI();   //ideally, inject this dependency. tough with IntentService
+        return webAPI.performFetchQuestion();
+    }
+
+
+    protected void passFetchedQuestionToStorage(String questionJSON) {
+        WebDataStorage.getInstance(getApplicationContext()).setQuestion(questionJSON);
+    }
+
+//    private void
 }

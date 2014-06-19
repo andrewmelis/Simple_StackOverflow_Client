@@ -10,7 +10,7 @@ public class FetchQuestionButtonListener implements View.OnClickListener {
     }
 
     protected void callStartActionFetchQuestion(View view) {
-        WebIntentService.startActionFetchQuestion(view.getContext(), WebIntentService.class);
+        WebIntentService.startActionFetchQuestion(view.getContext());
     }
 
 
