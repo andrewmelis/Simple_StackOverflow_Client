@@ -1,9 +1,9 @@
-package com.andrew.stackoverflow.app.test;
+package com.andrew.stackoverflow.app.test.data;
 
 import android.database.DataSetObserver;
 import android.test.AndroidTestCase;
 
-import com.andrew.stackoverflow.app.WebDataStorage;
+import com.andrew.stackoverflow.app.data.WebDataStorage;
 
 public class WebDataStorage_Test extends AndroidTestCase {
 

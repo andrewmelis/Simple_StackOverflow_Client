@@ -1,10 +1,13 @@
-package com.andrew.stackoverflow.app;
+package com.andrew.stackoverflow.app.service;
 
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
+
+import com.andrew.stackoverflow.app.network.WebAPI;
+import com.andrew.stackoverflow.app.data.WebDataStorage;
+
+import java.net.MalformedURLException;
 
 /* static methods serve as web API facade
     results sent directly to WebDataStorage
@@ -40,14 +43,20 @@ public class WebIntentService extends IntentService {
     }
 
     protected String retrieveQuestionFromWebAPI() {
-        WebAPI webAPI = new WebAPI();   //ideally, inject this dependency. tough with IntentService
-        return webAPI.performFetchQuestion();
+        WebAPI webAPI = null;   //ideally, inject this dependency. tough with IntentService
+        String retrieved = null;
+        try {
+            webAPI = new WebAPI();
+            retrieved = webAPI.performFetchQuestion();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return retrieved;
     }
-
 
     protected void passFetchedQuestionToStorage(String questionJSON) {
-        WebDataStorage.getInstance(getApplicationContext()).setQuestion(questionJSON);
+        if (questionJSON != null) {
+            WebDataStorage.getInstance(getApplicationContext()).setQuestion(questionJSON);
+        }
     }
-
-//    private void
 }

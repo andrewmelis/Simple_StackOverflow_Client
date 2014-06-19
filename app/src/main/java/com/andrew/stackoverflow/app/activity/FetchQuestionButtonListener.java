@@ -1,6 +1,8 @@
-package com.andrew.stackoverflow.app;
+package com.andrew.stackoverflow.app.activity;
 
 import android.view.View;
+
+import com.andrew.stackoverflow.app.service.WebIntentService;
 
 public class FetchQuestionButtonListener implements View.OnClickListener {
 

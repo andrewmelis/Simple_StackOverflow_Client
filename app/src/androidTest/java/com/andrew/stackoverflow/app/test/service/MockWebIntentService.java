@@ -1,6 +1,7 @@
-package com.andrew.stackoverflow.app.test;
+package com.andrew.stackoverflow.app.test.service;
 
-import com.andrew.stackoverflow.app.WebIntentService;
+import com.andrew.stackoverflow.app.service.WebIntentService;
+import com.andrew.stackoverflow.app.test.data.TestingWebDataStorage;
 
 public class MockWebIntentService extends WebIntentService {
 

@@ -1,7 +1,9 @@
-package com.andrew.stackoverflow.app;
+package com.andrew.stackoverflow.app.data;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
+
+import com.andrew.stackoverflow.app.data.WebDataStorage;
 
 public class WebDataStorageLoader extends AsyncTaskLoader<String> {
 

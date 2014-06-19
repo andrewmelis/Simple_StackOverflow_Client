@@ -1,9 +1,9 @@
-package com.andrew.stackoverflow.app.test;
+package com.andrew.stackoverflow.app.test.data;
 
 import android.test.InstrumentationTestCase;
 
-import com.andrew.stackoverflow.app.WebDataStorage;
-import com.andrew.stackoverflow.app.WebDataStorageLoader;
+import com.andrew.stackoverflow.app.data.WebDataStorage;
+import com.andrew.stackoverflow.app.data.WebDataStorageLoader;
 
 public class WebDataStorageLoader_Test extends InstrumentationTestCase {
 

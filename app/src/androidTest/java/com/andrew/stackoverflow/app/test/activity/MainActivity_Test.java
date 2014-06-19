@@ -1,4 +1,4 @@
-package com.andrew.stackoverflow.app.test;
+package com.andrew.stackoverflow.app.test.activity;
 
 import android.content.Loader;
 import android.content.pm.ActivityInfo;
@@ -8,16 +8,17 @@ import android.test.UiThreadTest;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.andrew.stackoverflow.app.MainActivity;
+import com.andrew.stackoverflow.app.activity.MainActivity;
 import com.andrew.stackoverflow.app.R;
-import com.andrew.stackoverflow.app.WebDataStorage;
-import com.andrew.stackoverflow.app.WebDataStorageLoader;
+import com.andrew.stackoverflow.app.data.WebDataStorage;
+import com.andrew.stackoverflow.app.data.WebDataStorageLoader;
+import com.andrew.stackoverflow.app.test.data.TestingWebDataStorage;
 
 public class MainActivity_Test extends ActivityInstrumentationTestCase2<MainActivity> {
 
     private MainActivity activity;
-    private TextView fetchedQuestionText;
     private Button fetchQuestionButton;
+    private TextView fetchedQuestionText;
     private TestingWebDataStorage storage;
 
     public MainActivity_Test() {
@@ -31,8 +32,8 @@ public class MainActivity_Test extends ActivityInstrumentationTestCase2<MainActi
         activity = getActivity();
         storage = TestingWebDataStorage.getInstance(activity);
 
-        fetchedQuestionText = (TextView) activity.findViewById(R.id.fetched_question_text);
         fetchQuestionButton = (Button) activity.findViewById(R.id.fetch_question_button);
+        fetchedQuestionText = (TextView) activity.findViewById(R.id.fetched_question_text);
     }
 
     @Override
@@ -60,13 +61,26 @@ public class MainActivity_Test extends ActivityInstrumentationTestCase2<MainActi
 
     public void testRotateToLandscapeOrientationMaintainsPreviousQuestion() {
         WebDataStorage.getInstance(activity).setQuestion("other fetched question");
-        rotateScreen();
+        rotateScreenToLandscape();
         assertEquals("other fetched question", fetchedQuestionText.getText().toString());
 
         clearRealWebDataStorage();
     }
 
-    private void rotateScreen() {
+    public void testRotateToPortraitOrientationMaintainsPreviousQuestion() {
+        WebDataStorage.getInstance(activity).setQuestion("other fetched question");
+        rotateScreenToPortrait();
+        assertEquals("other fetched question", fetchedQuestionText.getText().toString());
+
+        clearRealWebDataStorage();
+    }
+
+    private void rotateScreenToLandscape() {
+        activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        getInstrumentation().waitForIdleSync();
+    }
+
+    private void rotateScreenToPortrait() {
         activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         getInstrumentation().waitForIdleSync();
     }

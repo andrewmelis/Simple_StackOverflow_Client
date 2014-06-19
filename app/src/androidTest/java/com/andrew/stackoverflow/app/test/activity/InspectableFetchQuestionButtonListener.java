@@ -1,9 +1,9 @@
-package com.andrew.stackoverflow.app.test;
+package com.andrew.stackoverflow.app.test.activity;
 
 import android.view.View;
 
-import com.andrew.stackoverflow.app.FetchQuestionButtonListener;
-import com.andrew.stackoverflow.app.WebIntentService;
+import com.andrew.stackoverflow.app.activity.FetchQuestionButtonListener;
+import com.andrew.stackoverflow.app.service.WebIntentService;
 
 public class InspectableFetchQuestionButtonListener extends FetchQuestionButtonListener {
 

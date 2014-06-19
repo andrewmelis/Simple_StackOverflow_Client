@@ -1,7 +1,9 @@
-package com.andrew.stackoverflow.app.test;
+package com.andrew.stackoverflow.app.test.service;
 
 import android.content.Intent;
 import android.test.ServiceTestCase;
+
+import com.andrew.stackoverflow.app.test.data.TestingWebDataStorage;
 
 public class WebIntentService_Test extends ServiceTestCase<MockWebIntentService> {
 

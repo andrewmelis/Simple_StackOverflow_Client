@@ -1,8 +1,8 @@
-package com.andrew.stackoverflow.app.test;
+package com.andrew.stackoverflow.app.test.data;
 
 import android.content.Context;
 
-import com.andrew.stackoverflow.app.WebDataStorage;
+import com.andrew.stackoverflow.app.data.WebDataStorage;
 
 public class TestingWebDataStorage extends WebDataStorage {
 
